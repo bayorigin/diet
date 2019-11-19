@@ -8,6 +8,7 @@ module.exports = function(app, options, callback){
     var protocolName = typeof options == 'object' && (options.cert || options.key || options.ca) ? 'https' : 'http' ;
     var protocol = require(protocolName)
     var host = new Host(app, protocol, app.location)
+    protocol.globalAgent.maxSockets = options.maxSockets    
     
     // define http or https server
     if(protocolName === 'http'){
